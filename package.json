@@ -1,0 +1,27 @@
+{
+  "name": "gke-client",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "k8": "GOOGLE_APPLICATION_CREDENTIALS=seo-ve-credentials.json node --inspect kubernetes.js",
+    "k82-old": "GOOGLE_APPLICATION_CREDENTIALS=seo-ve-credentials.json KUBECONFIG=kubeconfig.yaml node --inspect kubernetes.js",
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "build": "docker build . -t eu.gcr.io/busbud-integrations/k8-tests:latest",
+    "push": "docker push eu.gcr.io/busbud-integrations/k8-tests:latest",
+    "pi:up": "kubectl apply -f pearlbash.yaml -n seo-ve-production",
+    "pi:down": "kubectl delete job pi -n seo-ve-production",
+    "k8:up": "kubectl apply -f k8.yaml -n seo-ve-production",
+    "k8:down": "kubectl delete job k8 -n seo-ve-production",
+    "get-pods": "kubectl get pods -n seo-ve-production"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "@google-cloud/container": "^3.0.0",
+    "@kubernetes/client-node": "^0.16.3",
+    "google-auth-library": "^7.14.0",
+    "js-yaml": "^4.1.0"
+  }
+}

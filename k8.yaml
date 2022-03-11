@@ -1,0 +1,26 @@
+apiVersion: batch/v1
+kind: Job
+metadata:
+  name: k8
+spec:
+  template:
+    spec:
+      volumes:
+      - name: google-cloud-key
+        secret:
+          secretName: seo-ve-credentials
+      - name: kubeconfig
+        secret:
+          secretName: kubeconfig
+      containers:
+      - name: k8
+        image: eu.gcr.io/busbud-integrations/k8-tests:latest
+        command: ["node",  "wait.js"]
+        volumeMounts:
+        - name: google-cloud-key
+          mountPath: /var/secrets/google
+        env:
+        - name: GOOGLE_APPLICATION_CREDENTIALS
+          value: /var/secrets/google/key.json
+      restartPolicy: Never
+  backoffLimit: 4

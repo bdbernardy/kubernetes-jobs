@@ -102,3 +102,6 @@ dist
 
 # TernJS port file
 .tern-port
+
+# Google credentials
+seo-ve-credentials.json
